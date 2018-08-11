@@ -42,13 +42,13 @@ export default class TodoList extends React.Component {
 
   handleCheckbox(e) {
     let todos = this.state.todos;
-    
-    for (let i = 0; i < todos.length; i++) {
-      if (todos[i].id == e.target.value) {
-        todos[i].completed = !todos[i].completed;
-        break;
+
+    todos.forEach(todo => {
+      if (todo.id == e.target.value) {
+        todo.completed = !todo.completed;
+        return false;
       }
-    }
+    });
 
     this.setState({todos: todos});
   }
@@ -70,16 +70,7 @@ export default class TodoList extends React.Component {
   }
 
   countCompleted() {
-    let count = 0;
-    const todos = this.state.todos;
-
-    for (let i = 0; i < todos.length; i++) {
-      if (todos[i].completed) {
-        count++;
-      }
-    }
-
-    return count;
+    return this.state.todos.filter(todo => todo.completed).length;
   }
 
   render() {
