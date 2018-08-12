@@ -55,18 +55,18 @@ export default class TodoList extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    let todos = this.state.todos;
-
-    todos.push({
-      id: new Date().getTime(),
-      title: this.state.title,
-      completed: false
-    });
 
     this.setState({
       title: '',
-      todos: todos
-    });
+      todos: [
+        ...this.state.todos,
+        {
+        id: new Date().getTime(),
+        title: this.state.title,
+        completed: false
+        }
+      ]
+    })
   }
 
   countCompleted() {
